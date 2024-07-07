@@ -34,12 +34,12 @@
                             style="color: brown;">主頁</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdownMenuLink" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false" style="color: brown;">
                             功能列
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="./tdee-calculator.html">TDEE計算機</a></li>
+                            <li><a class="dropdown-item active" href="./tdee-calculator.html">TDEE計算機</a></li>
                             <li><a class="dropdown-item" href="./nutrition_plate.html">建立營養餐盤</a></li>
                             <li><a class="dropdown-item" href="http://www.google.com">Something else here</a></li>
                         </ul>
@@ -67,14 +67,14 @@
                 <hr>
                 <div class="input-group mb-3 ms-5" style="width: 300px; ">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">身高</span>
+                        <span class="input-group-text" id="basic-addon1">身高(公分)</span>
                     </div>
                     <input v-model="userData.height" type="text" class="form-control" placeholder="輸入身高"
                         aria-label="Username" aria-describedby="basic-addon1">
                 </div>
                 <div class="input-group mb-3 ms-5" style="width: 300px; ">
                     <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon">體重</span>
+                        <span class="input-group-text" id="basic-addon">體重(公斤)</span>
                     </div>
                     <input v-model="userData.weight" type="text" class="form-control" placeholder="輸入體重"
                         aria-label="Username" aria-describedby="basic-addon1">
