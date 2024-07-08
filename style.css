@@ -1,0 +1,25 @@
+
+.modal-header h3 {
+    font-size: 30px;
+    color: brown;
+    position: absolute;
+    top: 7%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.modal-content {
+    background-color: burlywood;
+}
+
+.modal-body form .name, .modal-body form .protein, .modal-body form .fat, .modal-body form .carbohydrate, .modal-body form .calorie {
+    margin: 15px;
+    width: 90%;
+    border-radius: 20px;
+}
+
+.modal-body form .btn {
+    width: 100%;
+    font-size: 25px;
+    color: white
+}

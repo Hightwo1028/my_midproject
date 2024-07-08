@@ -7,9 +7,9 @@
     <title>Know What You Eat</title>
     <!-- 以下引用Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+    <!-- css link  -->
+    <link rel="stylesheet" href="style.css">
     <style>
         .backGround {
             background-image: url(./淡化拉麵屋.png);
@@ -56,14 +56,57 @@
         </div>
     </nav>
 
+    <!--連結出的表單-->
+    <div class="modal fade" id="addFood">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Header -->
+                <div class="modal-header">
+                    <h3>新增食物</h3>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <!-- Body -->
+                <div class="modal-body">
+                    <!-- 登入表單 -->
+                    <form>
+                        <div class="form-group">
+                            <input type="" class="name form-control" placeholder="食物名稱">
+                        </div>
+                        <div class="form-group">
+                            <input type="" class="protein form-control" placeholder="食物每百公克所含蛋白質">
+                        </div>
+                        <div class="form-group">
+                            <input type="" class="fat form-control" placeholder="食物每百公克所含脂質">
+                        </div>
+                        <div class="form-group">
+                            <input type="" class="carbohydrate form-control" placeholder="食物每百公克所含碳水化合物">
+                        </div>
+                        <div class="form-group">
+                            <input type="" class="calorie form-control" placeholder="食物每百公克所提供的熱量">
+                        </div>
+                        <!-- 送出 -->
+                        <button type="button" class="btn btn-info">新增</button>
+                    </form>
+                </div>
+                <!-- Footer -->
+                <div class="modal-footer">
+                    <a href="https://consumer.fda.gov.tw/Food/TFND.aspx?nodeID=178" target="_blank">查詢食物營養素</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--連結出的表單-->
+
     <div id="app">
         <div class="rounded" style="background-color: lightsteelblue; opacity: .7; margin-top: 50px; height: 700px;">
-            <div class="p-4 text-center fs-1" style="color: firebrick ;">建立你的營養餐盤</div>
+            <div class="p-4 text-center fs-1" style="color: firebrick ;">
+                <a href="#" type="button" data-bs-toggle="modal" data-bs-target="#addFood" style="width: 20%;">新增食物</a>
+                建立你的營養餐盤</div>
             <div class="fs-1 text-center" style="height: 600px;">
                 <table style="margin-left: 20px;">
                     <thead>
                         <tr>
-                            <td><input type="checkbox" v-model="data.selectd" @change="selectAll"/></td>
+                            <td><input type="checkbox" v-model="data.selectd" @change="selectAll" /></td>
                             <td class="fs-4">名稱</td>
                             <td class="fs-4">蛋白質</td>
                             <td class="fs-4">脂質</td>
@@ -86,15 +129,16 @@
                             <td class="fs-4">{{ value.calorie }}</td>
                             <td class="fs-4">{{ value.serve }}</td>
                             <td>
-                                <input v-model="value.serve" type="text" style="width: 100px; height: 40px;" @change="modifyServeOfFood">
-                                <button class="fs-6" @click="modifyServeOfFood(value)">√</button>
+                                <input v-model="value.serve" type="text" style="width: 100px; height: 40px;"
+                                    @change="modifyServeOfFood">
+                                <!-- <button class="fs-6" @click="modifyServeOfFood(value)">√</button> -->
                             </td>
                         </tr>
                     </tbody>
                     <tfoot>
                         <tr>
                             <td class="fs-4">總熱量：{{ totalCalorie() }}</td>
-                            <td></td>  
+                            <td></td>
                             <td class="fs-4">蛋白質：{{ proteinOfCalorie() }}%</td>
                             <td></td>
                             <td class="fs-4">脂質：{{ fatOfCalorie() }}%</td>
@@ -103,11 +147,9 @@
                             <td>||</td>
                             <td class="fs-4">其餘：{{ otherOfCalorie() }}%</td>
                             <td></td>
-                        </tr>   
+                        </tr>
                     </tfoot>
                 </table>
-
-
 
             </div>
         </div>
@@ -149,17 +191,18 @@
                         serve: 100,
                     }]
                 })
+                const showModal = ref(false)
 
                 const modifyServeOfFood = () => {  //修改份量
-                    value.protein = value.protein * (serve / 100);
-                    value.fat = value.fat * serve / 100;
-                    value.carbohydrate = value.carbohydrate * (serve / 100);
-                    value.calorie = calorie * (serve / 100);
+                    value.protein = value.protein * (value.serve / 100);
+                    value.fat = value.fat * (value.serve / 100);
+                    value.carbohydrate = value.carbohydrate * (value.serve / 100);
+                    value.calorie = calorie * (value.serve / 100);
                 }
 
                 const totalCalorie = () => {   //計算總熱量
                     let totalenergy = 0;
-                    for(let i = 0; i < data.checkboxList.length; i++) {
+                    for (let i = 0; i < data.checkboxList.length; i++) {
                         totalenergy += data.checkboxList[i].calorie;
                     }
                     return totalenergy;
@@ -168,51 +211,51 @@
                 const proteinOfCalorie = () => {
                     let totalProtein = 0;
                     let proteinPercent = 0;
-                    for( let i = 0; i < data.checkboxList.length; i++) {
+                    for (let i = 0; i < data.checkboxList.length; i++) {
                         totalProtein += data.checkboxList[i].protein;
-                    }   
-                        proteinPercent = (totalProtein * 4) / totalCalorie();
-                        return Math.round((proteinPercent * 100));
+                    }
+                    proteinPercent = (totalProtein * 4) / totalCalorie();
+                    return Math.round((proteinPercent * 100));
 
                 }
 
                 const fatOfCalorie = () => {
                     let totalFat = 0;
                     let fatPercent = 0;
-                    for( let i = 0; i < data.checkboxList.length; i++) {
+                    for (let i = 0; i < data.checkboxList.length; i++) {
                         totalFat += data.checkboxList[i].fat;
                     }
-                        fatPercent = (totalFat * 9) / totalCalorie();
-                        return Math.round((fatPercent * 100));
+                    fatPercent = (totalFat * 9) / totalCalorie();
+                    return Math.round((fatPercent * 100));
                 }
 
                 const carbohydrateOfCalorie = () => {
                     let totalCarbohydrate = 0;
                     let carbohydratePercent = 0;
-                    for( let i = 0; i < data.checkboxList.length; i++) {
+                    for (let i = 0; i < data.checkboxList.length; i++) {
                         totalCarbohydrate += data.checkboxList[i].carbohydrate;
                     }
-                        carbohydratePercent = (totalCarbohydrate * 4) / totalCalorie();
-                        return Math.round((carbohydratePercent * 100));
+                    carbohydratePercent = (totalCarbohydrate * 4) / totalCalorie();
+                    return Math.round((carbohydratePercent * 100));
                 }
 
                 const otherOfCalorie = () => {
                     let carbohydratePercent = 0;
-                        carbohydratePercent = 100 - proteinOfCalorie() - fatOfCalorie() - carbohydrateOfCalorie();
-                        return carbohydratePercent;
+                    carbohydratePercent = 100 - proteinOfCalorie() - fatOfCalorie() - carbohydrateOfCalorie();
+                    return carbohydratePercent;
                 }
 
                 const selectAll = () => {   //全選&取消全選
-                    if(data.selectd) {  //true
+                    if (data.selectd) {  //true
                         data.checkboxList = data.list;
                     }
                     else {  //false
-                        data.checkboxList = []; 
+                        data.checkboxList = [];
                     }
-                }   
+                }
 
                 const checkSelect = () => {
-                    if(data.checkboxList.length == data.list.length && data.list.length != 0) {
+                    if (data.checkboxList.length == data.list.length && data.list.length != 0) {
                         data.selectd = true;
                     }
                     else {
@@ -231,6 +274,7 @@
                     fatOfCalorie,
                     carbohydrateOfCalorie,
                     otherOfCalorie,
+                    showModal,
                 }
             }
         }).mount("#app")
