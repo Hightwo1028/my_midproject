@@ -101,7 +101,8 @@
         <div class="rounded" style="background-color: lightsteelblue; opacity: .7; margin-top: 50px; height: 700px;">
             <div class="p-4 text-center fs-1" style="color: firebrick ;">
                 <a href="#" type="button" data-bs-toggle="modal" data-bs-target="#addFood" style="width: 20%;">新增食物</a>
-                建立你的營養餐盤</div>
+                建立你的營養餐盤
+            </div>
             <div class="fs-1 text-center" style="height: 600px;">
                 <table style="margin-left: 20px;">
                     <thead>
@@ -113,8 +114,8 @@
                             <td class="fs-4">醣類</td>
                             <td class="fs-4">熱量</td>
                             <td class="fs-4">份量(克)</td>
-                            <td class="fs-4">份量修改</td>
-
+                            <td class="fs-4">份量修改(克)</td>
+                            <td style="font-size: 15px; color: red;">修改份量請大於20克</td>
                         </tr>
                     </thead>
                     <tbody>
@@ -129,9 +130,14 @@
                             <td class="fs-4">{{ value.calorie }}</td>
                             <td class="fs-4">{{ value.serve }}</td>
                             <td>
-                                <input v-model="value.serve" type="text" style="width: 100px; height: 40px;"
-                                    @change="modifyServeOfFood">
-                                <!-- <button class="fs-6" @click="modifyServeOfFood(value)">√</button> -->
+                                <input v-model="value.newServe" type="text"
+                                    style="width: 100px; height: 40px; font-size: 20px;"
+                                    @change="modifyServeOfFood(value)" placeholder="輸入克數">
+                                <!-- <button @click="modifyServeOfFood(value)"> </button> -->
+                            </td>
+                            <td>
+                                <button class="fs-5" style="width: 60px; height: 40px;"
+                                    @click="deleteElement(index,value.id)">刪除</button>
                             </td>
                         </tr>
                     </tbody>
@@ -156,7 +162,7 @@
     </div>
 
     <script type="module">
-        import { createApp, reactive, ref } from './vue.esm-browser.js'
+        import { createApp, reactive, ref, watch } from './vue.esm-browser.js'
 
         createApp({
             setup() {
@@ -171,6 +177,7 @@
                         carbohydrate: 0,
                         calorie: 0,
                         serve: 100,
+                        newServe: null,
                     },
                     {
                         id: 2,
@@ -180,6 +187,8 @@
                         carbohydrate: 0,
                         calorie: 164,
                         serve: 100,
+                        newServe: null,
+
                     },
                     {
                         id: 3,
@@ -189,94 +198,118 @@
                         carbohydrate: 41,
                         calorie: 183,
                         serve: 100,
+                        newServe: null,
                     }]
                 })
-                const showModal = ref(false)
 
-                const modifyServeOfFood = () => {  //修改份量
-                    value.protein = value.protein * (value.serve / 100);
-                    value.fat = value.fat * (value.serve / 100);
-                    value.carbohydrate = value.carbohydrate * (value.serve / 100);
-                    value.calorie = calorie * (value.serve / 100);
+                const templist = reactive([
+                    {
+                        id: 0,
+                        name: "",
+                        protein: 0,
+                        fat: 0,
+                        carbohydrate: 0,
+                        calorie: 0,
+                        serve: 100,
+                        newServe: 1,
+                    }
+                ])
+
+                const modifyServeOfFood = (value) => {  //修改份量
+                    if (value.newServe >= 20) {
+                        value.protein = Math.round(value.protein * (value.newServe / value.serve));
+                        value.fat = Math.round(value.fat * (value.newServe / value.serve));
+                        value.carbohydrate = Math.round(value.carbohydrate * (value.newServe / value.serve));
+                        value.calorie = Math.round(value.calorie * (value.newServe / value.serve));
+                        value.serve = value.newServe;
+                    }
                 }
 
                 const totalCalorie = () => {   //計算總熱量
-                    let totalenergy = 0;
-                    for (let i = 0; i < data.checkboxList.length; i++) {
-                        totalenergy += data.checkboxList[i].calorie;
-                    }
-                    return totalenergy;
+                let totalenergy = 0;
+                for (let i = 0; i < data.checkboxList.length; i++) {
+                    totalenergy += data.checkboxList[i].calorie;
                 }
+                return totalenergy;
+            }
 
                 const proteinOfCalorie = () => {
-                    let totalProtein = 0;
-                    let proteinPercent = 0;
-                    for (let i = 0; i < data.checkboxList.length; i++) {
-                        totalProtein += data.checkboxList[i].protein;
-                    }
-                    proteinPercent = (totalProtein * 4) / totalCalorie();
-                    return Math.round((proteinPercent * 100));
-
+                let totalProtein = 0;
+                let proteinPercent = 0;
+                for (let i = 0; i < data.checkboxList.length; i++) {
+                    totalProtein += data.checkboxList[i].protein;
                 }
+                proteinPercent = (totalProtein * 4) / totalCalorie();
+                return Math.round((proteinPercent * 100));
+
+            }
 
                 const fatOfCalorie = () => {
-                    let totalFat = 0;
-                    let fatPercent = 0;
-                    for (let i = 0; i < data.checkboxList.length; i++) {
-                        totalFat += data.checkboxList[i].fat;
-                    }
-                    fatPercent = (totalFat * 9) / totalCalorie();
-                    return Math.round((fatPercent * 100));
+                let totalFat = 0;
+                let fatPercent = 0;
+                for (let i = 0; i < data.checkboxList.length; i++) {
+                    totalFat += data.checkboxList[i].fat;
                 }
+                fatPercent = (totalFat * 9) / totalCalorie();
+                return Math.round((fatPercent * 100));
+            }
 
                 const carbohydrateOfCalorie = () => {
-                    let totalCarbohydrate = 0;
-                    let carbohydratePercent = 0;
-                    for (let i = 0; i < data.checkboxList.length; i++) {
-                        totalCarbohydrate += data.checkboxList[i].carbohydrate;
-                    }
-                    carbohydratePercent = (totalCarbohydrate * 4) / totalCalorie();
-                    return Math.round((carbohydratePercent * 100));
+                let totalCarbohydrate = 0;
+                let carbohydratePercent = 0;
+                for (let i = 0; i < data.checkboxList.length; i++) {
+                    totalCarbohydrate += data.checkboxList[i].carbohydrate;
                 }
+                carbohydratePercent = (totalCarbohydrate * 4) / totalCalorie();
+                return Math.round((carbohydratePercent * 100));
+            }
 
                 const otherOfCalorie = () => {
-                    let carbohydratePercent = 0;
-                    carbohydratePercent = 100 - proteinOfCalorie() - fatOfCalorie() - carbohydrateOfCalorie();
-                    return carbohydratePercent;
-                }
+                let carbohydratePercent = 0;
+                carbohydratePercent = 100 - proteinOfCalorie() - fatOfCalorie() - carbohydrateOfCalorie();
+                return carbohydratePercent;
+            }
 
                 const selectAll = () => {   //全選&取消全選
-                    if (data.selectd) {  //true
-                        data.checkboxList = data.list;
-                    }
-                    else {  //false
-                        data.checkboxList = [];
-                    }
+                if (data.selectd) {  //true
+                    data.checkboxList = data.list;
                 }
-
-                const checkSelect = () => {
-                    if (data.checkboxList.length == data.list.length && data.list.length != 0) {
-                        data.selectd = true;
-                    }
-                    else {
-                        data.selectd = false;
-                    }
-                }
-
-
-                return {
-                    data,
-                    modifyServeOfFood,
-                    totalCalorie,
-                    selectAll,
-                    checkSelect,
-                    proteinOfCalorie,
-                    fatOfCalorie,
-                    carbohydrateOfCalorie,
-                    otherOfCalorie,
-                    showModal,
+                else {  //false
+                    data.checkboxList = [];
                 }
             }
+
+                const checkSelect = () => {
+                if (data.checkboxList.length == data.list.length && data.list.length != 0) {
+                    data.selectd = true;
+                }
+                else {
+                    data.selectd = false;
+                }
+            }
+
+                const deleteElement = (index, id) => {
+                data.list.splice(index, 1)
+                let newArr = data.checkboxList.filter((value, index) => {
+                    return value.id != id
+                })
+                data.checkboxList = newArr;
+            }
+
+                return {
+                data,
+                modifyServeOfFood,
+                totalCalorie,
+                selectAll,
+                checkSelect,
+                proteinOfCalorie,
+                fatOfCalorie,
+                carbohydrateOfCalorie,
+                otherOfCalorie,
+                templist,
+                deleteElement,
+            }
+        }
         }).mount("#app")
     </script>
 
