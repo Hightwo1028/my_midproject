@@ -15,6 +15,21 @@
             background-image: url(./淡化拉麵屋.png);
             background-size: cover;
         }
+
+        .hachiwareFace {
+            width: 60px;
+            height: 60px;
+        }
+
+        .inputBlock {
+            display: flex;
+        }
+
+        .glassesUsagi {
+            width: 200px;
+            height: 200px;
+            margin-left: 200px;
+        }
     </style>
 </head>
 
@@ -57,34 +72,42 @@
     </nav>
 
     <div id="app">
-        <div class="rounded" style="background-color: lightsteelblue; opacity: .7; margin-top: 50px; height: 700px;">
-            <div class="p-4 text-center fs-1" style="color: firebrick ;">TDEE計算機
+        <div class="rounded" style="background-color: lightsteelblue; opacity: .7; margin-top: 50px; height: 750px;">
+            <div class="p-4 text-center fs-1" style="color: firebrick ;">
+                <img  class="hachiwareFace" src="./processedImage/hachiwareFace.png" alt="">
+                TDEE計算機
+                <img  class="hachiwareFace" src="./processedImage/hachiwareFace.png" alt="">
             </div>
-            <div class="fs-1 text-center" style="height: 600px;">
+            <div class="fs-1 text-center">
                 <span>TDEE是以你身高、體重以及運動量去推算出你每日消耗熱量</span>
                 <br>
                 <span>將數值填入下方，讓我們試算你的TDEE</span>
                 <hr>
-                <div class="input-group mb-3 ms-5" style="width: 300px; ">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">身高(公分)</span>
+                <div class="inputBlock">
+                    <div>
+                        <div class="input-group mb-3 ms-5" style="width: 300px; ">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">身高(公分)</span>
+                            </div>
+                            <input v-model="userData.height" type="text" class="form-control" placeholder="輸入身高"
+                                aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group mb-3 ms-5" style="width: 300px;">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon">體重(公斤)</span>
+                            </div>
+                            <input v-model="userData.weight" type="text" class="form-control" placeholder="輸入體重"
+                                aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                        <div class="input-group mb-3 ms-5" style="width: 300px; ">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon">年齡</span>
+                            </div>
+                            <input v-model="userData.age" type="text" class="form-control" placeholder="輸入年齡"
+                                aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
                     </div>
-                    <input v-model="userData.height" type="text" class="form-control" placeholder="輸入身高"
-                        aria-label="Username" aria-describedby="basic-addon1">
-                </div>
-                <div class="input-group mb-3 ms-5" style="width: 300px; ">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon">體重(公斤)</span>
-                    </div>
-                    <input v-model="userData.weight" type="text" class="form-control" placeholder="輸入體重"
-                        aria-label="Username" aria-describedby="basic-addon1">
-                </div>
-                <div class="input-group mb-3 ms-5" style="width: 300px; ">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon">年齡</span>
-                    </div>
-                    <input v-model="userData.age" type="text" class="form-control" placeholder="輸入年齡"
-                        aria-label="Username" aria-describedby="basic-addon1">
+                    <img class="glassesUsagi" src="./processedImage/glassesUsagi.png" alt="">
                 </div>
                 <div>
                     <span class="fs-4">生理性別：</span>
@@ -138,7 +161,7 @@
                     }
                 }
 
-                
+
                 return {
                     userData,
                     tdee,
