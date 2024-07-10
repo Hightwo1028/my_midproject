@@ -108,13 +108,6 @@
     border-radius:10px;
 }
 
-.buttonForDelete {
-    border-radius:10px;
-    width: 60px; 
-    height: 40px;
-    font-size: 20px;
-}
-
 .backGround {
     background-image: url(./淡化拉麵屋.png);
     background-size: cover;
@@ -133,4 +126,17 @@
     width: 200px;
     height: 200px;
     margin-left: 200px;
+}
+
+.buttonForDelete {
+    border-radius:10px;
+    width: 90px; 
+    height: 40px;
+    font-size: 20px;
+}
+
+.momongaInDelete {
+    width: 32px;
+    height: 30px;
+    padding-right: 5px;
 }
