@@ -71,6 +71,20 @@
             padding-left: 125px;
             margin-top: 10px;
         }
+
+        .outputButton {
+            width: 40x;
+            height: 40px;
+            font-size: 20px;
+            margin-left: 1065px ;
+        }
+
+        .inputButton {
+            width: 40x;
+            height: 40px;
+            font-size: 20px;
+            margin-left: 10px;
+        }
     </style>
 </head>
 
@@ -170,7 +184,7 @@
                     建立你的營養餐盤
                 </div>
             </div>
-            <div class="fs-1 text-center" style="height: 600px;">
+            <div class="fs-1 text-center" style="height: 50px;" style="display: flex;">
                 <table style="margin-left: 20px;">
                     <thead>
                         <tr>
@@ -223,9 +237,13 @@
                         </tr>
                     </tfoot>
                 </table>
-
             </div>
+            <button @click="exportJSON" class="outputButton">匯出資料</button>
+            <input type="file" ref="fileInput" @change="importJSON" style="display:none;">
+            <button @click="triggerFileInput" class="inputButton" >匯入資料</button>
+            <pre>{{ output }}</pre>
         </div>
+
     </div>
 
     <script type="module">
@@ -379,6 +397,40 @@
                     data.checkboxList = newArr;
                 }
 
+                const fileInput = ref(null);
+                const output = ref('');
+
+                const exportJSON = () => {
+                    const jsonData = JSON.stringify(data.list, null, 2);
+                    const blob = new Blob([jsonData], { type: 'application/json' });
+                    const url = URL.createObjectURL(blob);
+
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'data.json';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                };
+
+                const triggerFileInput = () => {
+                    fileInput.value.click();
+                };
+
+                const importJSON = (event) => {
+                    const file = event.target.files[0];
+                    if (file) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            const jsonString = e.target.result;
+                            const jsonData = JSON.parse(jsonString);
+                            data.list = jsonData;
+                        };
+                        reader.readAsText(file);
+                    }
+                };
+
                 return {
                     data,
                     modifyServeOfFood,
@@ -397,6 +449,11 @@
                     newCarbohydrate,
                     newCalorie,
                     //newElementOfNewFood,
+                    fileInput,
+                    output,
+                    exportJSON,
+                    triggerFileInput,
+                    importJSON
                 }
             }
         }).mount("#app")
