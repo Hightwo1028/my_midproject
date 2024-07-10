@@ -16,8 +16,6 @@
         body {
             font-family: 'Noto Sans TC', sans-serif;
         }
-
-
     </style>
 </head>
 
@@ -25,7 +23,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" style="color: brown;" >
+            <a class="navbar-brand" style="color: brown;">
                 <img class="navbarImage" src="./processedImage/crusadeHachiware.png" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
@@ -79,22 +77,24 @@
                         <!-- 登入表單 -->
                         <form>
                             <div class="form-group">
-                                <input style="font-weight:bold;" v-model="newName" type="text" class="name form-control" placeholder="食物名稱">
+                                <input style="font-weight:bold;" v-model="newName" type="text" class="name form-control"
+                                    placeholder="食物名稱">
                             </div>
                             <div class="form-group">
-                                <input style="font-weight:bold;" v-model="newCalorie" type="" class="calorie form-control"
-                                    placeholder="食物每百公克所提供的熱量">
+                                <input style="font-weight:bold;" v-model="newCalorie" type=""
+                                    class="calorie form-control" placeholder="食物每百公克所提供的熱量">
                             </div>
                             <div class="form-group">
-                                <input style="font-weight:bold;" v-model="newProtein" type="" class="protein form-control"
-                                    placeholder="食物每百公克所含蛋白質">
+                                <input style="font-weight:bold;" v-model="newProtein" type=""
+                                    class="protein form-control" placeholder="食物每百公克所含蛋白質">
                             </div>
                             <div class="form-group">
-                                <input style="font-weight:bold;" v-model="newFat" type="" class="fat form-control" placeholder="食物每百公克所含脂質">
+                                <input style="font-weight:bold;" v-model="newFat" type="" class="fat form-control"
+                                    placeholder="食物每百公克所含脂質">
                             </div>
                             <div class="form-group">
-                                <input style="font-weight:bold;" v-model="newCarbohydrate" type="" class="carbohydrate form-control"
-                                    placeholder="食物每百公克所含碳水化合物">
+                                <input style="font-weight:bold;" v-model="newCarbohydrate" type=""
+                                    class="carbohydrate form-control" placeholder="食物每百公克所含碳水化合物">
                             </div>
                             <!-- 送出 -->
                             <button @click="pushNewdata(newName, newProtein, newFat, newCarbohydrate, newCalorie)"
@@ -103,24 +103,21 @@
                     </div>
                     <!-- Footer -->
                     <div class="modal-footer">
-                        <a href="https://consumer.fda.gov.tw/Food/TFND.aspx?nodeID=178" target="_blank" >查詢食物營養素</a>
+                        <a href="https://consumer.fda.gov.tw/Food/TFND.aspx?nodeID=178" target="_blank">查詢食物營養素</a>
                     </div>
                 </div>
             </div>
         </div>
         <!--連結出的表單-->
-        <div style="position: fixed; z-index: 99; display: block;">
-            <button @click="exportJSON" class="outputButton">匯出資料</button>
-            <input type="file" ref="fileInput" @change="importJSON" style="display:none;">
-            <button @click="triggerFileInput" class="inputButton" >匯入資料</button>
-            <pre>{{ output }}</pre>
-            <!-- <img class="cookChiikawa" src="./processedImage/cookChiikawa.png" alt=""> -->
-        </div>
+        <!-- <div style="position: fixed; z-index: 99; display: block;">
+
+            <img class="cookChiikawa" src="./processedImage/cookChiikawa.png" alt=""> 
+        </div> -->
         <div class="rounded" style="background-color: lightsteelblue; opacity: .7; margin-top: 50px; height: 1300px;">
             <div class="mainBlockTitle">
                 <img class="chiikawaLittleFace" src="./processedImage/chiikawa_little_face.png" alt="">
-                <button class="forAddFoodLocation"  type="button" data-bs-toggle="modal"
-                data-bs-target="#addFood">新增食物</button>
+                <button class="forAddFoodLocation" type="button" data-bs-toggle="modal"
+                    data-bs-target="#addFood">新增食物</button>
                 <div class="mainTitle">
                     建立你的營養餐盤
                 </div>
@@ -157,8 +154,7 @@
                                     @change="modifyServeOfFood(value)" placeholder="輸入克數">
                             </td>
                             <td>
-                                <button class="buttonForDelete"
-                                    @click="deleteElement(index, value.id)">
+                                <button class="buttonForDelete" @click="deleteElement(index, value.id)">
                                     <img class="momongaInDelete" src="./processedImage/momonga.png">刪除
                                 </button>
                             </td>
@@ -175,11 +171,14 @@
                             <td class="fs-4 bold">醣類：{{ carbohydrateOfCalorie() }}% </td>
                             <td>||</td>
                             <td class="fs-4 bold">其餘：{{ otherOfCalorie() }}%</td>
-                            <td></td>
                         </tr>
                     </tfoot>
                 </table>
             </div>
+            <button @click="exportJSON" class="outputButton">匯出資料</button>
+            <input type="file" ref="fileInput" @change="importJSON" style="display:none;">
+            <button @click="triggerFileInput" class="inputButton" >匯入資料</button>
+            <pre>{{ output }}</pre>
         </div>
 
     </div>
@@ -349,7 +348,7 @@
                             suggestedName: 'data.json',
                             types: [{
                                 description: 'JSON Files',
-                                accept: {'application/json': ['.json']}
+                                accept: { 'application/json': ['.json'] }
                             }]
                         });
 
