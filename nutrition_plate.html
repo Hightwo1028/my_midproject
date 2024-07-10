@@ -17,74 +17,7 @@
             font-family: 'Noto Sans TC', sans-serif;
         }
 
-        .backGround {
-            background-image: url(./淡化拉麵屋.png);
-            background-size: cover;
-        }
 
-        .adjustUsagiInModal {
-            padding-left: 112px;
-        }
-
-        .usagiInModal {
-            display: flex;
-            margin: auto;
-            width: 250px;
-            height: 250px;
-        }
-
-        .adjustXbuttonInModal {
-            display: flex;
-            padding-left: 85px;
-            padding-bottom: 300px;
-        }
-
-        .form-group {
-            padding-left: 18px;
-        }
-
-        .mainBlockTitle {
-            display: flex
-        }
-
-        .chiikawaLittleFace {
-            width: 50px;
-            height: 50px;
-            margin-left: 180px;
-            margin-top: 15px;
-        }
-
-        .forAddFoodLocation {
-            margin-top: 15px;
-            padding-top: 5px;
-            width: 8%;
-            height: 30px;
-            font-size: 24px;
-            display: inline
-        }
-
-        .mainTitle {
-            display: inline;
-            font-size: 40px;
-            color: brown;
-            padding-right: 450px;
-            padding-left: 125px;
-            margin-top: 10px;
-        }
-
-        .outputButton {
-            width: 40x;
-            height: 40px;
-            font-size: 20px;
-            margin-left: 1065px ;
-        }
-
-        .inputButton {
-            width: 40x;
-            height: 40px;
-            font-size: 20px;
-            margin-left: 10px;
-        }
     </style>
 </head>
 
@@ -92,7 +25,9 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" style="color: brown;" href="#">導覽列</a>
+            <a class="navbar-brand" style="color: brown;" >
+                <img class="navbarImage" src="./processedImage/images-fotor-bg-remover-20240709144638-fotor-bg-remover-20240710113333.png" alt="">
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -148,6 +83,10 @@
                                 <input v-model="newName" type="text" class="name form-control" placeholder="食物名稱">
                             </div>
                             <div class="form-group">
+                                <input v-model="newCalorie" type="" class="calorie form-control"
+                                    placeholder="食物每百公克所提供的熱量">
+                            </div>
+                            <div class="form-group">
                                 <input v-model="newProtein" type="" class="protein form-control"
                                     placeholder="食物每百公克所含蛋白質">
                             </div>
@@ -157,10 +96,6 @@
                             <div class="form-group">
                                 <input v-model="newCarbohydrate" type="" class="carbohydrate form-control"
                                     placeholder="食物每百公克所含碳水化合物">
-                            </div>
-                            <div class="form-group">
-                                <input v-model="newCalorie" type="" class="calorie form-control"
-                                    placeholder="食物每百公克所提供的熱量">
                             </div>
                             <!-- 送出 -->
                             <button @click="pushNewdata(newName, newProtein, newFat, newCarbohydrate, newCalorie)"
