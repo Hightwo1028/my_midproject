@@ -26,7 +26,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" style="color: brown;" >
-                <img class="navbarImage" src="./processedImage/images-fotor-bg-remover-20240709144638-fotor-bg-remover-20240710113333.png" alt="">
+                <img class="navbarImage" src="./processedImage/crusadeHachiware.png" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,21 +80,21 @@
                         <!-- 登入表單 -->
                         <form>
                             <div class="form-group">
-                                <input v-model="newName" type="text" class="name form-control" placeholder="食物名稱">
+                                <input style="font-weight:bold;" v-model="newName" type="text" class="name form-control" placeholder="食物名稱">
                             </div>
                             <div class="form-group">
-                                <input v-model="newCalorie" type="" class="calorie form-control"
+                                <input style="font-weight:bold;" v-model="newCalorie" type="" class="calorie form-control"
                                     placeholder="食物每百公克所提供的熱量">
                             </div>
                             <div class="form-group">
-                                <input v-model="newProtein" type="" class="protein form-control"
+                                <input style="font-weight:bold;" v-model="newProtein" type="" class="protein form-control"
                                     placeholder="食物每百公克所含蛋白質">
                             </div>
                             <div class="form-group">
-                                <input v-model="newFat" type="" class="fat form-control" placeholder="食物每百公克所含脂質">
+                                <input style="font-weight:bold;" v-model="newFat" type="" class="fat form-control" placeholder="食物每百公克所含脂質">
                             </div>
                             <div class="form-group">
-                                <input v-model="newCarbohydrate" type="" class="carbohydrate form-control"
+                                <input style="font-weight:bold;" v-model="newCarbohydrate" type="" class="carbohydrate form-control"
                                     placeholder="食物每百公克所含碳水化合物">
                             </div>
                             <!-- 送出 -->
@@ -104,7 +104,7 @@
                     </div>
                     <!-- Footer -->
                     <div class="modal-footer">
-                        <a href="https://consumer.fda.gov.tw/Food/TFND.aspx?nodeID=178" target="_blank">查詢食物營養素</a>
+                        <a href="https://consumer.fda.gov.tw/Food/TFND.aspx?nodeID=178" target="_blank" >查詢食物營養素</a>
                     </div>
                 </div>
             </div>
@@ -124,13 +124,13 @@
                     <thead>
                         <tr>
                             <td><input type="checkbox" v-model="data.selectd" @change="selectAll" /></td>
-                            <td class="fs-4">名稱</td>
-                            <td class="fs-4">蛋白質</td>
-                            <td class="fs-4">脂質</td>
-                            <td class="fs-4">醣類</td>
-                            <td class="fs-4">熱量</td>
-                            <td class="fs-4">份量(克)</td>
-                            <td class="fs-4">份量修改(克)</td>
+                            <td class="fs-4 bold">名稱</td>
+                            <td class="fs-4 bold">蛋白質</td>
+                            <td class="fs-4 bold">脂質</td>
+                            <td class="fs-4 bold">醣類</td>
+                            <td class="fs-4 bold">熱量</td>
+                            <td class="fs-4 bold">份量(克)</td>
+                            <td class="fs-4 bold">份量修改(克)</td>
                             <td style="font-size: 15px; color: red;">修改份量請大於20克</td>
                         </tr>
                     </thead>
@@ -146,7 +146,7 @@
                             <td class="fs-4">{{ value.calorie }}</td>
                             <td class="fs-4">{{ value.serve }}</td>
                             <td>
-                                <input v-model="value.newServe" type="text"
+                                <input class="bold" v-model="value.newServe" type="text"
                                     style="width: 100px; height: 40px; font-size: 20px; border-radius:10px; border-width: 2px;"
                                     @change="modifyServeOfFood(value)" placeholder="輸入克數">
                                 <!-- <button @click="modifyServeOfFood(value)"> </button> -->
@@ -160,15 +160,15 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td class="fs-4">總熱量：{{ totalCalorie() }}</td>
+                            <td class="fs-4 bold">總熱量：{{ totalCalorie() }}</td>
                             <td></td>
-                            <td class="fs-4">蛋白質：{{ proteinOfCalorie() }}%</td>
+                            <td class="fs-4 bold">蛋白質：{{ proteinOfCalorie() }}%</td>
                             <td></td>
-                            <td class="fs-4">脂質：{{ fatOfCalorie() }}%</td>
+                            <td class="fs-4 bold">脂質：{{ fatOfCalorie() }}%</td>
                             <td></td>
-                            <td class="fs-4">醣類：{{ carbohydrateOfCalorie() }}% </td>
+                            <td class="fs-4 bold">醣類：{{ carbohydrateOfCalorie() }}% </td>
                             <td>||</td>
-                            <td class="fs-4">其餘：{{ otherOfCalorie() }}%</td>
+                            <td class="fs-4 bold">其餘：{{ otherOfCalorie() }}%</td>
                             <td></td>
                         </tr>
                     </tfoot>
@@ -178,6 +178,7 @@
             <input type="file" ref="fileInput" @change="importJSON" style="display:none;">
             <button @click="triggerFileInput" class="inputButton" >匯入資料</button>
             <pre>{{ output }}</pre>
+            <img class="cookChiikawa" src="./processedImage/cookChiikawa.png" alt="">
         </div>
 
     </div>
@@ -213,11 +214,11 @@
                     },
                     {
                         id: 3,
-                        name: "米飯",
-                        protein: 3,
-                        fat: 0.3,
-                        carbohydrate: 41,
-                        calorie: 183,
+                        name: "煎餃",
+                        protein: 12,
+                        fat: 25,
+                        carbohydrate: 23.5,
+                        calorie: 286.5,
                         serve: 100,
                         newServe: null,
                     }]
@@ -336,18 +337,26 @@
                 const fileInput = ref(null);
                 const output = ref('');
 
-                const exportJSON = () => {
+                const exportJSON = async () => {
                     const jsonData = JSON.stringify(data.list, null, 2);
                     const blob = new Blob([jsonData], { type: 'application/json' });
-                    const url = URL.createObjectURL(blob);
 
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = 'data.json';
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
-                    URL.revokeObjectURL(url);
+                    // 使用 File System Access API 選擇保存位置和文件名
+                    try {
+                        const handle = await window.showSaveFilePicker({
+                            suggestedName: 'data.json',
+                            types: [{
+                                description: 'JSON Files',
+                                accept: {'application/json': ['.json']}
+                            }]
+                        });
+
+                        const writableStream = await handle.createWritable();
+                        await writableStream.write(blob);
+                        await writableStream.close();
+                    } catch (err) {
+                        console.error('Error saving file:', err);
+                    }
                 };
 
                 const triggerFileInput = () => {
