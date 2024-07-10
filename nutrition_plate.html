@@ -46,7 +46,6 @@
                         <ul class="dropdown-menu active" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item" href="./tdee-calculator.html">TDEE計算機</a></li>
                             <li><a class="dropdown-item active" href="./nutrition_plate.html">建立營養餐盤</a></li>
-                            <li><a class="dropdown-item" href="http://www.google.com">Something else here</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
@@ -110,7 +109,14 @@
             </div>
         </div>
         <!--連結出的表單-->
-        <div class="rounded" style="background-color: lightsteelblue; opacity: .7; margin-top: 50px; height: 1000px;">
+        <div style="position: fixed; z-index: 99; display: block;">
+            <button @click="exportJSON" class="outputButton">匯出資料</button>
+            <input type="file" ref="fileInput" @change="importJSON" style="display:none;">
+            <button @click="triggerFileInput" class="inputButton" >匯入資料</button>
+            <pre>{{ output }}</pre>
+            <!-- <img class="cookChiikawa" src="./processedImage/cookChiikawa.png" alt=""> -->
+        </div>
+        <div class="rounded" style="background-color: lightsteelblue; opacity: .7; margin-top: 50px; height: 1300px;">
             <div class="mainBlockTitle">
                 <img class="chiikawaLittleFace" src="./processedImage/chiikawa_little_face.png" alt="">
                 <button class="forAddFoodLocation"  type="button" data-bs-toggle="modal"
@@ -119,7 +125,7 @@
                     建立你的營養餐盤
                 </div>
             </div>
-            <div class="fs-1 text-center" style="height: 50px;" style="display: flex;">
+            <div class="fs-1 text-center" style="height: 1000px;" style="display: flex;">
                 <table style="margin-left: 20px;">
                     <thead>
                         <tr>
@@ -146,15 +152,15 @@
                             <td class="fs-4">{{ value.calorie }}</td>
                             <td class="fs-4">{{ value.serve }}</td>
                             <td>
-                                <input class="bold" v-model="value.newServe" type="text"
+                                <input v-model="value.newServe" type="text"
                                     style="width: 100px; height: 40px; font-size: 20px; border-radius:10px; border-width: 2px;"
                                     @change="modifyServeOfFood(value)" placeholder="輸入克數">
-                                <!-- <button @click="modifyServeOfFood(value)"> </button> -->
                             </td>
                             <td>
                                 <button class="buttonForDelete"
-                                    @click="deleteElement(index,value.id)">
-                                    <img class="momongaInDelete" src="./processedImage/momonga.png" alt="">刪除</button>
+                                    @click="deleteElement(index, value.id)">
+                                    <img class="momongaInDelete" src="./processedImage/momonga.png">刪除
+                                </button>
                             </td>
                         </tr>
                     </tbody>
@@ -174,11 +180,6 @@
                     </tfoot>
                 </table>
             </div>
-            <button @click="exportJSON" class="outputButton">匯出資料</button>
-            <input type="file" ref="fileInput" @change="importJSON" style="display:none;">
-            <button @click="triggerFileInput" class="inputButton" >匯入資料</button>
-            <pre>{{ output }}</pre>
-            <img class="cookChiikawa" src="./processedImage/cookChiikawa.png" alt="">
         </div>
 
     </div>
@@ -328,6 +329,7 @@
 
                 const deleteElement = (index, id) => {
                     data.list.splice(index, 1)
+
                     let newArr = data.checkboxList.filter((value, index) => {
                         return value.id != id
                     })
