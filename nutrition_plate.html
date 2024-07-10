@@ -113,8 +113,8 @@
         <div class="rounded" style="background-color: lightsteelblue; opacity: .7; margin-top: 50px; height: 1000px;">
             <div class="mainBlockTitle">
                 <img class="chiikawaLittleFace" src="./processedImage/chiikawa_little_face.png" alt="">
-                <a class="forAddFoodLocation" href="#" type="button" data-bs-toggle="modal"
-                    data-bs-target="#addFood">新增食物</a>
+                <button class="forAddFoodLocation"  type="button" data-bs-toggle="modal"
+                data-bs-target="#addFood">新增食物</button>
                 <div class="mainTitle">
                     建立你的營養餐盤
                 </div>
@@ -147,12 +147,12 @@
                             <td class="fs-4">{{ value.serve }}</td>
                             <td>
                                 <input v-model="value.newServe" type="text"
-                                    style="width: 100px; height: 40px; font-size: 20px;"
+                                    style="width: 100px; height: 40px; font-size: 20px; border-radius:10px; border-width: 2px;"
                                     @change="modifyServeOfFood(value)" placeholder="輸入克數">
                                 <!-- <button @click="modifyServeOfFood(value)"> </button> -->
                             </td>
                             <td>
-                                <button class="fs-5" style="width: 60px; height: 40px;"
+                                <button class="buttonForDelete"
                                     @click="deleteElement(index,value.id)">刪除</button>
                             </td>
                         </tr>
