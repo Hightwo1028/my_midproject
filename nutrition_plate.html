@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Know What You Eat</title>
     <!-- 以下引用Bootstrap -->
+    <!-- 以下引用Bootstrap -->
     <link rel="stylesheet" href="./css/bootstrap.min.css">
     <script src="./js/bootstrap.bundle.min.js"></script>
     <!-- css link  -->
@@ -15,6 +16,11 @@
 
         body {
             font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        .backGround {
+            background-image: url(./淡化拉麵屋.png);
+            background-size: cover;
         }
     </style>
 </head>
@@ -47,12 +53,8 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://www.google.com" style="color: brown;">Features</a>
+                        <a class="nav-link" href="./carousel_video.html" style="color: brown;">營養報你知</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="http://www.google.com" style="color: brown;">Pricing</a>
-                    </li>
-
                 </ul>
             </div>
         </div>
@@ -121,6 +123,10 @@
                 <div class="mainTitle">
                     建立你的營養餐盤
                 </div>
+                <button @click="exportJSON" class="outputButton">匯出資料</button>
+                <input type="file" ref="fileInput" @change="importJSON" style="display:none;">
+                <button @click="triggerFileInput" class="inputButton">匯入資料</button>
+                <pre>{{ output }}</pre>
             </div>
             <div class="fs-1 text-center" style="height: 1000px;" style="display: flex;">
                 <table style="margin-left: 20px;">
@@ -175,10 +181,6 @@
                     </tfoot>
                 </table>
             </div>
-            <button @click="exportJSON" class="outputButton">匯出資料</button>
-            <input type="file" ref="fileInput" @change="importJSON" style="display:none;">
-            <button @click="triggerFileInput" class="inputButton" >匯入資料</button>
-            <pre>{{ output }}</pre>
         </div>
 
     </div>
@@ -218,7 +220,7 @@
                         protein: 12,
                         fat: 25,
                         carbohydrate: 23.5,
-                        calorie: 286.5,
+                        calorie: 367,
                         serve: 100,
                         newServe: null,
                     }]

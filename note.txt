@@ -1,0 +1,134 @@
+在 Vue 3 中，「自動更新 DOM」指的是 Vue 的響應式數據綁定機制。這種機制允許開發者將數據與 HTML 模板綁定，當數據改變時，Vue 會自動偵測到這些變化並更新相應的 DOM 元素，而不需要手動操作 DOM。這種自動更新的能力是 Vue 框架的一個核心特性，帶來了以下主要好處：
+
+好處
+代碼簡潔性：
+
+開發者不需要直接操作 DOM，而是專注於數據的狀態管理和應用邏輯的實現。這樣可以使代碼更加簡潔和易於理解，減少了冗餘的 DOM 操作代碼。
+性能優化：
+
+Vue 使用虛擬 DOM 和 diff 算法來最小化 DOM 更新的次數和範圍。當數據發生變化時，Vue 會比較新旧虛擬 DOM 樹的差異，然後僅更新必要的部分，而不是整個 DOM 結構。這樣可以提高應用的性能效率。
+自動化管理：
+
+Vue 的響應式系統會自動追蹤依賴，當數據發生變化時，所有依賴這些數據的地方（如模板中的表達式或指令）會自動更新。這使得開發者無需擔心手動更新視圖的問題，增強了代碼的可維護性和一致性。
+
+
+
+========================
+
+當比較 Vue 3 的響應式數據綁定與 jQuery 手動更新 DOM 的差異時，明顯的例子可以是實現一個簡單的待辦事項列表。以下是這兩種方式的具體實現，並比較它們在維護上的差異。
+
+Vue 3 實現
+在 Vue 3 中，我們可以利用響應式數據綁定來自動更新 DOM。以下是使用 Vue 3 實現一個待辦事項列表的範例：
+
+HTML
+html
+複製程式碼
+<div id="app"></div>
+Vue 3 代碼
+javascript
+複製程式碼
+<template>
+  <div>
+    <h1>Todo List</h1>
+    <ul>
+      <li v-for="(todo, index) in todos" :key="index">
+        {{ todo }}
+        <button @click="removeTodo(index)">Remove</button>
+      </li>
+    </ul>
+    <input v-model="newTodo" placeholder="Add a todo">
+    <button @click="addTodo">Add</button>
+  </div>
+</template>
+
+<script>
+import { reactive, ref } from 'vue';
+
+export default {
+  setup() {
+    const todos = reactive(['Learn Vue', 'Build a project']);
+    const newTodo = ref('');
+
+    const addTodo = () => {
+      if (newTodo.value.trim()) {
+        todos.push(newTodo.value);
+        newTodo.value = '';
+      }
+    };
+
+    const removeTodo = (index) => {
+      todos.splice(index, 1);
+    };
+
+    return {
+      todos,
+      newTodo,
+      addTodo,
+      removeTodo
+    };
+  }
+}
+</script>
+jQuery 實現
+使用 jQuery，我們需要手動選擇 DOM 元素並更新其內容。以下是使用 jQuery 實現相同待辦事項列表的範例：
+
+HTML
+html
+複製程式碼
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <h1>Todo List</h1>
+    <ul id="todo-list">
+      <li>Learn jQuery <button class="remove">Remove</button></li>
+      <li>Build a project <button class="remove">Remove</button></li>
+    </ul>
+    <input id="new-todo" placeholder="Add a todo">
+    <button id="add-todo">Add</button>
+  </div>
+  
+  <script>
+    $(document).ready(function() {
+      $('#add-todo').on('click', function() {
+        const newTodo = $('#new-todo').val().trim();
+        if (newTodo) {
+          $('#todo-list').append(`<li>${newTodo} <button class="remove">Remove</button></li>`);
+          $('#new-todo').val('');
+        }
+      });
+
+      $('#todo-list').on('click', '.remove', function() {
+        $(this).parent().remove();
+      });
+    });
+  </script>
+</body>
+</html>
+差異分析
+代碼簡潔性和可讀性：
+
+Vue 3：使用響應式數據綁定，數據改變會自動反映到 DOM，代碼更簡潔，清晰地分離了數據和視圖。
+jQuery：需要手動操作 DOM，事件綁定和 DOM 操作混合在一起，代碼冗長且容易出錯。
+維護性：
+
+Vue 3：數據變更和 DOM 更新自動同步，修改和擴展功能簡單。例如，要添加新的功能（如編輯待辦事項），只需更新數據邏輯，Vue 會自動更新視圖。
+jQuery：每次數據變更都需要手動更新 DOM，維護性差。例如，要添加新的功能，需要在多個地方更新代碼（更新數據，手動操作 DOM），增加了出錯的風險和維護的複雜性。
+性能：
+
+Vue 3：使用虛擬 DOM 和高效的差分算法，僅更新必要的 DOM 節點，性能優化好。
+jQuery：每次數據變更都直接操作真實 DOM，操作頻繁時會導致性能下降。
+擴展性：
+
+Vue 3：組件化結構，容易擴展和重用組件，提高開發效率。
+jQuery：需要手動管理代碼結構，擴展性差，重用性低。
+總結來說，Vue 3 通過響應式數據綁定提供了一個更現代化、更高效、更易維護的開發方式，而 jQuery 的手動 DOM 操作在大型應用中容易變得冗長和難以維護。
+
+
+stringify     pronounce ==> strin gi fy

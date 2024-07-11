@@ -65,12 +65,12 @@
 .chiikawaLittleFace {
     width: 50px;
     height: 50px;
-    margin-left: 180px;
-    margin-top: 10px;
+    margin-left: 30px;
+    margin-top: 17.5px;
 }
 
 .forAddFoodLocation {
-    margin-top: 15px;
+    margin-top: 22.5px;
     padding-top: 5px;
     width: 8%;
     height: 40px;
@@ -80,14 +80,24 @@
     background-color:#FFD4D4
 }
 
+.mainConfirm {
+    padding-bottom: 35px;
+    margin-top: 35px;
+    width: 140px;
+    height: 50px;
+    font-size: 30px;
+    font-weight:bold;
+    border-radius: 10px;
+    background-color: gold;
+}
+
 .confirmCalculator {
     border-radius: 10px;
     font-size: 24px;
     font-weight:bold;
     width: 70px;
     height: 45px;
-    color: cadetblue;
-    background-color:maroon;
+    background-color:gold
 }
 
 .mainTitle {
@@ -95,23 +105,24 @@
     font-size: 40px;
     font-weight:bold;
     color: brown;
-    padding-right: 450px;
-    padding-left: 125px;
+    padding-right: 200px;
+    padding-left: 305px;
     margin-top: 10px;
 }
 
 .outputButton {
+    margin-top: 22.5px;
     width: 40x;
     height: 40px;
     font-size: 20px;
     font-weight:bold;
-    margin-left: 1065px ;
     border-radius:10px;
     color: yellowgreen;
     background-color:crimson;
 }
 
 .inputButton {
+    margin-top: 22.5px;
     width: 40x;
     height: 40px;
     font-size: 20px;
