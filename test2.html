@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+
+<script>
+    // $(() => {
+    //     $('button').click((event) => {
+    //         const id = event.target.id
+    //         console.log(id);
+    //     })
+
+    //     $('button').css('color', 'blue')   ///////////////////
+
+    //     //  document.querySelectorAll('button').forEach((button) => {
+    //     //      button.onclick = (event) => {
+    //     //          const id = event.target.id
+    //     //          console.log(id);
+    //     //      }
+    //     //  })
+
+
+    // })
+    $(() => {
+        // const jsred = document.getElementById('red')
+        // console.log(jsred);
+        // const qred = $('#red')
+        // console.log(qred);
+        // const x = qred.get(0)   //jQ物件轉js陣列內容
+        // console.log(x);
+        // console.log("==================");
+        // const y = $(jsred)
+        // console.log(y);
+        
+        const qred = $('button')
+        console.log(qred);
+        for (let i = 0; i < qred.length; i++){
+            $(qred.get(i)).css('color', qred[i].id)
+        }
+
+        // for (i = 0; i < $('button').length; i++) {
+        //     $('button').get(i).style.color = $('button').get(i).id
+        // }
+
+
+
+    })
+
+
+
+</script>
+
+<body>
+    <button id="red">Red</button>
+    <button id="yellow">Yellow</button>
+    <button id="green">Green</button>
+    <button id="gray">Gray</button>
+    <p></p>
+    <img src="" id="myimg">
+</body>
+
+</html>

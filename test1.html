@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<script>
+    // 1
+    // windows.onload = () = {
+
+
+    // }
+    // 2
+    // $(() => {
+    //     $('#bn').click(() => {
+    //         $('#content').html('Hello, World')
+    //     })
+    // })
+
+    // $(() => {
+    //     $('#bn').click(() => {
+    //         $('#content1').html('Hi, World')
+    //     })
+    // })
+    // 3         其中選1
+    // $(function() {
+
+
+    // })
+    // window.onload = () => {
+    //     console.log("1")
+    //     console.log("1")
+    //     console.log("1")
+    //     console.log("1")
+    //     console.log("1")
+    // }
+
+
+    // $(() => {
+    //     $('.area').on('mousemove', (event) => {
+    //         $('#x').html(event.offsetX)
+    //         $('#y').html(event.offsetY)
+    //     })
+    //     $('#google').click((event) => {
+    //         if(! confirm('準備連到外部網站')) {
+    //             event.preventDefault()
+    //         }
+    //     })
+    // })
+
+    // $(() => {
+    //     $('#bn').click(() => {
+    //         if((document.getElementById("userpassword").innerText) === (document.getElementById("userpasswordCheck").innerText)){
+    //             alert("輸入正確，已登入")
+    //         }
+    //         else {
+    //             alert("錯誤")
+    //         }
+    //     })
+    // })
+
+    $(() => {
+        $('#bn').click(() => {
+            if(($("#userpassword").text()) === ($("#userpassword").text())){
+                alert("輸入正確，已登入")
+            }
+            else if(!(($("#userpassword").text()) !== ($("#userpassword").text()))) {
+                alert("錯誤")
+            }
+
+            console.log()
+        })
+    })
+</script>
+<style>
+    .area {
+        width: 100px;
+        height: 100px;
+        background-color: aquamarine;
+    }
+</style>
+
+<body>
+    <a id="google" href="http://www.google.com">Google</a><br>
+
+    <div id="content"></div>
+    <div id="content1"></div>
+    <div class="area"></div>
+    x: <label id="x">0</label><p></p>
+    y: <label id="y">0</label>
+
+
+    <div>
+        帳號:
+        <input id="useraccount" type="text"><br>
+        密碼:
+        <input id="userpassword" type="text"><br>
+        再輸入密碼:
+        <input id="userpasswordCheck" type="text"><br>
+        <button id="bn">確認</button>
+    </div>
+</body>
+
+</html>
